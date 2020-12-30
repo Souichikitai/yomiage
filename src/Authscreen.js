@@ -24,20 +24,7 @@ const Tab = createBottomTabNavigator(
   // }
 );
 
-const createHomeStack = () => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: 'tomato'
-      }
-    }}
-  >
-    <Stack.Screen 
-      name="Home" component={Home}
-    />
-  </Stack.Navigator>
 
-)
 
 const createYomiageStack = () => (
   <Stack.Navigator
@@ -46,6 +33,7 @@ const createYomiageStack = () => (
         backgroundColor: 'tomato'
       }
     }}
+    
   >
     <Stack.Screen name="Yomiage" component={Yomiage} />
   </Stack.Navigator>
@@ -64,8 +52,46 @@ const createSettingStack = () => (
 )
 
 
+const createHomeStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: 'tomato'
+      }
+    }}
+  >
+    <Stack.Screen 
+      name="Home" component={Home}
+      options={{
+        title: 'ホーム'
+      }}
+    />
+  </Stack.Navigator>
+
+)
+
 
 export default function Authscreen() {
+
+  const [username, setUsername] = useState("");
+
+  const getUsername = async() => {
+    const value = await AsyncStorage.getItem('UserName')
+    if( value !== null) {
+     
+        setUsername(value);
+
+
+    }else{
+      Alert.alert("ユーザーネームをセーブしてください")
+  
+    }
+  }
+  
+ 
+  useEffect(() => {
+    getUsername();
+  })
 
   return (
         <Tab.Navigator 
@@ -79,20 +105,29 @@ export default function Authscreen() {
                     
                 },
                 labelStyle: {
-                    fontSize: 25
+                    fontSize: 23
                 }
                 }}
                 
             >
                 
                 <Tab.Screen 
+                options={{
+                  title: 'マイページ'
+                }}
                 name="Home" component={createHomeStack}          
                 />
                 <Tab.Screen 
                     name="Yomiage" component={createYomiageStack}
+                    options={{
+                      title: '読み上げ'
+                    }}
                 />
                 <Tab.Screen 
                     name="Setting" component={createSettingStack}
+                    options={{
+                      title: '設定'
+                    }}
                 />
             </Tab.Navigator>
 

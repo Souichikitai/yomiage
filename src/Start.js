@@ -86,14 +86,11 @@ const storeData = async () => {
     return(
 
         <SafeAreaView style={styles.container}>
-        <Text
-            style={{
-                fontSize:46,
-                marginTop:30,
-                margin:10,
-                
-            }}
+        <View style={styles.header}>
+        <Text style={styles.headerdesign}
         >就活面接　読み上げアプリ</Text>
+
+        </View>
 
         {usernameState == false ? (
                 <View>
@@ -104,7 +101,7 @@ const storeData = async () => {
                         }}
                         
                         >
-                            このアプリをダウンロードしていただけまして、誠にありがとうございます
+                            このアプリをダウンロードしていただきまして 誠にありがとうございます
                         </Text>
                         <Text style={{
                             marginTop: 30,
@@ -126,13 +123,19 @@ const storeData = async () => {
                             onChangeText={text => setUsername(text)} 
                             placeholder="     Type your username      "
                         />
-                        <Button 
-                        style={{
-                            marginTop: 30,
-                            
-                        }}
+
+                        <View style={{
+                            color: 'thistle'
+                        }}>
+                            <Button 
+                            style={{
+                                marginTop: 30,
+                                
+                            }}
                         
                         title="保存" onPress={storeData}/>
+                        </View>
+
                 </View>
         ):(<View></View>)}
 
@@ -153,7 +156,7 @@ const storeData = async () => {
 
         <TouchableOpacity style={styles.tukaikata}>
             <Text style={{
-                color: 'dodgerblue',
+                color: 'thistle',
                 fontSize: 20
             }}>
                 使い方
@@ -189,7 +192,7 @@ const storeData = async () => {
         // height: 100,
         fontSize: 60,
         margin: 60,
-        backgroundColor: 'deepskyblue',
+        backgroundColor: 'lavender',
         shadowColor: 'lightblue',
         shadowOffset: {width: -1, height: 1},
         shadowRadius:10
@@ -200,5 +203,13 @@ const storeData = async () => {
         alignItems: 'flex-end',
         color:'lightblue',
         
+    },
+    headerdesign: {
+                fontSize:46,
+                marginTop:30,
+                margin:10,
+    },
+    header: {
+        backgroundColor: 'tomato'
     }
   });
