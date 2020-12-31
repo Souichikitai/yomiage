@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from "react-redux";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Home({navigation}) {
     
@@ -23,7 +24,7 @@ const getUsername = async() =>{
 
     
         }else{
-          Alert.alert("ユーザーネームをセーブしてください")
+          Alert.alert("ユーザーネームを取得できませんでした")
       
         }
     
@@ -55,7 +56,19 @@ useEffect(()=>{
                 </Text>
             </View>
 
-            <Button title="Yomiage" onPress={()=>navigation.navigate('Yomiage')} />
+            <View style={styles.button1}>
+                <TouchableOpacity style={{borderRadius:20 ,paddingTop: 52, padding:15 , marginRight: 10, height: 125, backgroundColor: 'tomato', fontSize: 20}}>
+                    <Text style={{fontSize: 15, fontWeight: "600"}}>+ カスタム質問追加する</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{borderRadius:20, paddingTop: 52, padding:15 , marginLeft: 10, height: 125, backgroundColor: 'tomato', fontSize: 20}}>
+                    <Text style={{fontSize: 15, fontWeight: "600"}}>+ 企業別履歴に追加する</Text>
+                </TouchableOpacity>
+            </View>
+            <View>
+
+            </View>
+
+            {/* <Button title="Yomiage" onPress={()=>navigation.navigate('Yomiage')} /> */}
             {/* <Button title="remove storeage" onPress={removeItemValue}/> */}
         </SafeAreaView>
 
@@ -70,10 +83,21 @@ const styles = StyleSheet.create({
     //   justifyContent: 'center',
     },
     namae: {
+        flex: 0.05,
         fontSize: 20,
         paddingTop: 10,
         paddingLeft: 10,
         color: 'tomato',
         alignItems: 'flex-end',
+        // backgroundColor: 'lightblue'
+    },
+    button1: {
+        flex: 0.2,
+        // justifyContent: '',
+        // backgroundColor: 'lightblue',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10,
+        
     }
   });

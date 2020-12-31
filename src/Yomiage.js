@@ -16,7 +16,7 @@ export default function Yomiage({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: 'gainsboro',
       alignItems: 'center',
       justifyContent: 'center',
     },

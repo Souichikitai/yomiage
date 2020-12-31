@@ -30,12 +30,12 @@ const createYomiageStack = () => (
   <Stack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: 'tomato'
+        backgroundColor: 'tomato',
+        
       }
-    }}
-    
+    }}    
   >
-    <Stack.Screen name="Yomiage" component={Yomiage} />
+    <Stack.Screen name="Yomiage" component={Yomiage} options={{title: '読み上げ'}}/>
   </Stack.Navigator>
 )
 
@@ -47,7 +47,7 @@ const createSettingStack = () => (
       }
     }}
   >
-    <Stack.Screen name="Setting" component={Setting} />
+    <Stack.Screen name="Setting" component={Setting} options={{title: '設定'}} />
   </Stack.Navigator>
 )
 
@@ -63,7 +63,7 @@ const createHomeStack = () => (
     <Stack.Screen 
       name="Home" component={Home}
       options={{
-        title: 'ホーム'
+        title: 'マイページ'
       }}
     />
   </Stack.Navigator>

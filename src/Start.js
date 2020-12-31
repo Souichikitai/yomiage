@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Alert, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Alert, SafeAreaView, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -88,13 +88,18 @@ const storeData = async () => {
         <SafeAreaView style={styles.container}>
         <View style={styles.header}>
         <Text style={styles.headerdesign}
-        >就活面接　読み上げアプリ</Text>
+        
+        >就活面接　読み上げ</Text>
 
         </View>
 
         {usernameState == false ? (
-                <View>
-                <Text style={{
+                <View style={styles.flex2}>
+                    <View style={styles.image}>
+                    <Image source={require('../image/0095.png') } style={{width: 220, height: 310, marginLeft: 100}}/>
+
+                    </View>
+                {/* <Text style={{
                             marginTop: 30,
                             textAlign: 'center',
                             fontSize: 20
@@ -102,7 +107,7 @@ const storeData = async () => {
                         
                         >
                             このアプリをダウンロードしていただきまして 誠にありがとうございます
-                        </Text>
+                        </Text> */}
                         <Text style={{
                             marginTop: 30,
                             textAlign: 'center',
@@ -112,32 +117,31 @@ const storeData = async () => {
                         </Text>
                         <TextInput 
                             style={{
-                                marginTop: 30,
+                                marginTop: 40,
                                 marginLeft: 20,
                                 marginRight: 20,
                                 marginBottom: 20,
                                 padding:15,
-                                fontSize: 25
+                                fontSize: 25,
+                                borderRadius: 20,
+                                textAlign: 'center'
                             }}
-                            backgroundColor='lightgrey'
+                            backgroundColor='lavender'
                             onChangeText={text => setUsername(text)} 
-                            placeholder="     Type your username      "
+                            placeholder="名前を入れてください"
+                            
                         />
 
-                        <View style={{
-                            color: 'thistle'
-                        }}>
-                            <Button 
-                            style={{
-                                marginTop: 30,
-                                
-                            }}
-                        
-                        title="保存" onPress={storeData}/>
-                        </View>
+                        <TouchableOpacity style={styles.hozon} onPress ={storeData}>
+                            <Text style={{color: 'lavender', fontSize: 20}}>保存</Text>
+                        </TouchableOpacity>
+
 
                 </View>
         ):(<View></View>)}
+
+
+        <View style={styles.flex3}>
 
         <TouchableOpacity style={styles.button}
             onPress={forceRemount}
@@ -148,6 +152,7 @@ const storeData = async () => {
                 textShadowColor: 'white',
                 textShadowOffset: {width: -1, height: 1},
                 textShadowRadius: 10,
+                borderRadius: 20,
                 
             }}>
                 始める
@@ -156,12 +161,15 @@ const storeData = async () => {
 
         <TouchableOpacity style={styles.tukaikata}>
             <Text style={{
-                color: 'thistle',
+                color: 'lavender',
                 fontSize: 20
             }}>
                 使い方
             </Text>
         </TouchableOpacity>
+
+        </View>
+
 
 
     </SafeAreaView>
@@ -176,40 +184,66 @@ const storeData = async () => {
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
+      flex: 3,
       fontSize: 40,
     //   marginTop: 20,
       backgroundColor: 'tomato',
     //   alignItems: 'center',
-    //   justifyContent: 'center',
+    //   justifyContent: 'space-between',
     },
     button: {
         // fontSize:,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         padding: 10,
         // width:100,
         // height: 100,
         fontSize: 60,
-        margin: 60,
+        marginBottom: 10,
         backgroundColor: 'lavender',
         shadowColor: 'lightblue',
         shadowOffset: {width: -1, height: 1},
-        shadowRadius:10
+        shadowRadius:10,
+        borderRadius: 20,
+        marginLeft: 30,
+        marginRight: 30
         
     },
     tukaikata: {
         paddingRight: 40,
         alignItems: 'flex-end',
         color:'lightblue',
+        marginTop: 20
         
     },
     headerdesign: {
-                fontSize:46,
-                marginTop:30,
+                fontSize:42,
+                marginTop:20,
+                marginBottom: 20,
+                
                 margin:10,
+                fontWeight: '500',
+                
     },
     header: {
-        backgroundColor: 'tomato'
+        backgroundColor: 'tomato',
+        fontWeight: 'bold',
+        alignItems: 'center'
+    },
+    hozon: {
+        alignItems: 'center',
+    },
+    flex3: {
+        // flex: 1,
+        // justifyContent: 'flex-end'
+    },
+    flex2: {
+        flex: 1,
+        // justifyContent: 'center',
+        // alignContent: 'center'
+    },
+    image: {
+        alignContent: 'center',
+        alignContent: 'center'
     }
   });
