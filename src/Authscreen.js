@@ -4,10 +4,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
 import 'react-native-gesture-handler';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import Home from './Home';
 import Yomiage from './Yomiage';
@@ -54,6 +55,7 @@ const createSettingStack = () => (
 )
 
 
+
 const createHomeStack = () => (
   <Stack.Navigator
     screenOptions={{
@@ -78,6 +80,8 @@ export default function Authscreen() {
 
   const [username, setUsername] = useState("");
 
+  const navigation = useNavigation()
+
   const getUsername = async() => {
     const value = await AsyncStorage.getItem('UserName')
     if( value !== null) {
@@ -90,6 +94,7 @@ export default function Authscreen() {
   
     }
   }
+
   
  
   useEffect(() => {
@@ -124,7 +129,7 @@ export default function Authscreen() {
                 <Tab.Screen 
                     name="Yomiage" component={createYomiageStack}
                     options={{
-                      title: '読み上げ'
+                      title: '読み上げ',
                     }}
                 />
                 <Tab.Screen 
