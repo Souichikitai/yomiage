@@ -12,6 +12,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
 import Yomiage from './Yomiage';
 import Setting from './Setting';
+import Mypage from './Mypage'
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator(
@@ -59,6 +61,7 @@ const createHomeStack = () => (
         backgroundColor: 'tomato'
       }
     }}
+    headerMode='none'
   >
     <Stack.Screen 
       name="Home" component={Home}
@@ -108,6 +111,7 @@ export default function Authscreen() {
                     fontSize: 23
                 }
                 }}
+                
                 
             >
                 

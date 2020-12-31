@@ -5,16 +5,13 @@ import {useDispatch} from "react-redux";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Mypage from './Mypage';
-import CusttomQues from './CusttomQues';
+// import Mypage from './Mypage';
 
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 
 
-export default function Home({navigation}) {
-
-
+export default function CusttomQues({navigation}) {
     
 // const dispatch = useDispatch();
 
@@ -47,22 +44,18 @@ export default function Home({navigation}) {
     
     return(
 
-        <Stack.Navigator 
-            initialRouteName="Mypage"
-            // headerMode='none'
-            screenOptions={{
-                headerStyle: {
-                  backgroundColor: 'tomato'
-                }
-              }}
-        >
-            <Stack.Screen name ="Mypage" component={Mypage}
-                      options={{
-                        title: 'マイページ'
-                      }}
-            />
-            <Stack.Screen name="CusttomQues" component={CusttomQues}/>
-        </Stack.Navigator>
+        // <Stack.Navigator 
+        //     initialRouteName="Mypage"
+        //     headerMode='none'
+        // >
+        //     <Stack.Screen name ="マイページ" component={Mypage}/>
+        // </Stack.Navigator>
+
+        <SafeAreaView>
+            <View>
+                <Text>Hello</Text>
+            </View>
+        </SafeAreaView>
     );
 }
 
