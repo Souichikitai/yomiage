@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from "react-redux";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
+
+import * as SQLite from "expo-sqlite";
+
+const db = SQLite.openDatabase('db');
 
 // import Mypage from './Mypage';
 
@@ -11,7 +15,53 @@ import { createStackNavigator } from '@react-navigation/stack';
 // const Stack = createStackNavigator();
 
 
-export default function CusttomQues({navigation}) {
+export default function CusttomQues() {
+
+    const [new_kind, setNewKind] = useState("");
+    const [new_Bunn, setNewBunn] = useState("");
+    
+    
+    function insertSentence(){
+
+        console.log("insert is called");
+        var kind = new_kind;
+        var sentence = new_Bunn;
+
+        if(new_kind == "" || new_Bunn == ""){
+            Alert.alert("新しく追加するものを入れてください");
+        }else{
+            console.log('insert sentence, kind:' + kind + "" + sentence)
+      
+            db.transaction(tx => {
+              tx.executeSql(
+                "INSERT INTO sentences" +
+        
+                "(kind, sentence)" + 
+        
+                " VALUES (?, ?);" ,
+                [kind, sentence]
+              );
+            },
+            () => {console.log('fail')},
+            () => {console.log('success1222')},
+            );
+        }
+
+
+      }
+
+      function deleteAll(){
+        console.log("Delete all")
+      
+        db.transaction(tx => {
+          tx.executeSql(
+            "delete from sentences;"
+          );
+        },
+        () => {console.log('fail')},
+        () => {console.log('success')},
+        );
+    }
     
 // const dispatch = useDispatch();
 
@@ -44,44 +94,123 @@ export default function CusttomQues({navigation}) {
     
     return(
 
-        // <Stack.Navigator 
-        //     initialRouteName="Mypage"
-        //     headerMode='none'
-        // >
-        //     <Stack.Screen name ="マイページ" component={Mypage}/>
-        // </Stack.Navigator>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.kinds}>
+                <Text style={{
+                    fontSize: 30,
+                    paddingTop: 20,
+                    marginBottom: 10,
+                    marginLeft: 10,
+                }}>+ 新しく種類を追加する</Text>
+                <TextInput
+                    style={{
+                        backgroundColor: 'white',
+                        padding: 10,
+                        margin: 10,
+                        fontSize: 28,
+                    }}
+                    placeholder="種類"
+                    placeholderTextColor="grey"
+                    onChangeText={text => setNewKind(text)}
+                ></TextInput>
+            </View>
+            <View style={styles.border1}>
+                    <Text>hello</Text>
+            </View>
+            <View style={styles.sentencess}>
+                <Text style={{
+                    fontSize: 30,
+                    paddingTop: 20,
+                    marginBottom: 10,
+                    marginLeft: 10
+                }}>+ 新しく文章を追加する</Text>
+                <TextInput
+                    style={{
+                        backgroundColor: 'white',
+                        padding: 10,
+                        margin: 10,
+                        fontSize: 28,
+                    }}
+                    placeholder="種類"
+                    placeholderTextColor="grey"
+                    onChangeText={text => setNewBunn(text)}
+                ></TextInput>
+            </View>
+            <View style={styles.submit_button}>
+                <TouchableOpacity style={{
+                    backgroundColor: 'tomato',
+                    padding: 27,
+                    borderRadius: 30,
+                    marginTop: 10
+                }}
+                onPress={insertSentence}
+                >
+                    <Text style={{
+                        color: 'white'
+                    }}>登録する</Text>
+                </TouchableOpacity>
+            </View>
 
-        <SafeAreaView>
-            <View>
-                <Text>Hello</Text>
+            <View style={styles.submit_button2}>
+                <TouchableOpacity style={{
+                    backgroundColor: 'tomato',
+                    padding: 27,
+                    borderRadius: 30
+                }}
+                onPress={deleteAll}
+                >
+                    <Text style={{
+                        color: 'white'
+                    }}>全て削除する</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//       flex: 1,
-//       backgroundColor: 'gainsboro',
-//     //   alignItems: 'center',
-//     //   justifyContent: 'center',
-//     },
-//     namae: {
-//         flex: 0.04,
-//         fontSize: 20,
-//         paddingTop: 10,
-//         paddingLeft: 10,
-//         color: 'tomato',
-//         alignItems: 'flex-end',
-//         // backgroundColor: 'lightblue'
-//     },
-//     button1: {
-//         flex: 0.2,
-//         // justifyContent: '',
-//         // backgroundColor: 'lightblue',
-//         flexDirection: 'row',
-//         justifyContent: 'center',
-//         padding: 10,
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: 'gainsboro',
+    //   alignItems: 'center',
+    //   justifyContent: 'center',
+    },
+    kinds: {
+        flex: 0.2,
+        fontSize: 20,
+        // marginTop: 10,
+        // paddingLeft: 10,
+        color: 'tomato',
+        // alignItems: 'flex-end',
+        //   alignItems: 'center',
+        backgroundColor: 'lightgrey',
+        borderBottomColor: 'black',
+    },
+    border1 :{
+        flex: 0.002,
+        backgroundColor: 'black'
+    },
+    sentencess: {
+        flex: 0.2,
+        fontSize: 20,
+        // marginTop: 10,
+        // paddingLeft: 10,
+        color: 'tomato',
+        // alignItems: 'flex-end',
+        //   alignItems: 'center',
+        backgroundColor: 'lightgrey'
         
-//     }
-//   });
+    },
+    submit_button: {
+        padding: 5,
+        flex: 0.18,
+        alignItems: 'center',
+        // backgroundColor: 'lightblue'
+    },
+    submit_button2: {
+        padding: 5,
+        flex: 0.4,
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    }
+  });

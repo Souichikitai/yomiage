@@ -1,21 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Alert, SafeAreaView, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import Home from './Home';
+import * as SQLite from "expo-sqlite";
 
 import {useDispatch, useSelector} from "react-redux";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
+const db = SQLite.openDatabase('db');
+
+
+
+
+
 export default function Start() {
+
 
 const usernameState = useSelector((state) => state.usernameState);
 
 const [username, setUsername] = useState("");
-const [refresh, setRefresh] = useState("");
-const [userstate, setUserstate] = useState(GLOBAL.userstate);
+
 
 const dispatch = useDispatch();
 const navigation = useNavigation()
@@ -27,6 +34,7 @@ forceRemount = async() => {
         if( value !== null) {
          
             if(username !== ""){
+                createdatabase();
                 dispatch({type:"CHANGE_USER_STATE_TRUE"})
             }else{
                 Alert.alert("ユーザーネームを入れてください");
@@ -43,23 +51,25 @@ catch{
    
 }
 
+const createdatabase = () => {
+    // if(usernameState == false){
+        db.transaction(tx => {
+            tx.executeSql(
+                'create table if not exists sentences (id integer primary key not null, kind text, sentence text);', // 実行したいSQL文
+                null, // SQL文の引数
+                () => {console.log('success_creattion')}, // 成功時のコールバック関数
+                () => {console.log('fail')} // 失敗時のコールバック関数
+            );
+            },
+            () => {console.log('fail')}, // 失敗時のコールバック関数
+            () => {console.log('')} // 成功時のコールバック関数
+        )
+    // }
+}
 
-// const getData = async () => {
-//     try {
-//       const value = await AsyncStorage.getItem('UserName')
-//       if( value !== null) {
-       
-//         setusertrue();
-//         console.log(usernameState);
 
-//       }else{
-//         setUserstate(false)
-    
-//       }
-//     } catch(e) {
-    
-//     }
-//   }
+
+
 
 
 const storeData = async () => {
@@ -82,6 +92,12 @@ const storeData = async () => {
     }
 
 }
+
+// useEffect(() => {
+//     // createdatabase();
+// })
+
+// createdatabase();
 
     return(
 
