@@ -148,8 +148,8 @@ useEffect(()=>{
                 >
                     <Text style={{fontSize: 35, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>My 質問</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{borderRadius:20, paddingTop: 52, width: 200,padding:15 , marginLeft: 10, height: 125, backgroundColor: 'tomato', fontSize: 20}}>
-                    <Text style={{fontSize: 30, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>企業別履歴</Text>
+                <TouchableOpacity style={{borderRadius:20, paddingTop: 52, width: 170,padding:15 ,  height: 125, backgroundColor: 'tomato', fontSize: 20,}}>
+                    <Text style={{fontSize: 28, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>企業別履歴</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.button1}>
@@ -202,7 +202,8 @@ const styles = StyleSheet.create({
     topbutton: {
         flex: 0.2,
         flexDirection: 'row',
-        padding: 10,
+        padding: 5,
+        
     },
 
     button1: {

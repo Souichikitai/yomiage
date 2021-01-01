@@ -63,7 +63,9 @@ export default function Home({navigation}) {
                         
                       }}
             />
-            <Stack.Screen name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'lightgrey',}}/>
+            <Stack.Screen 
+                name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'lightgrey',title: "質問編集"}}
+            />
             <Stack.Screen
                 options={{title: '質問リスト', headerTintColor: 'lightgrey',}}
              name="Myquestion" component={Myquestion} />

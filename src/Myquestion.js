@@ -33,8 +33,8 @@ const Flat_list = ({ kind, sentence }) => (
         <View style={styles.border}>
             <Text style={{fontSize: 2}}>fe</Text>
         </View>
-        <Text >種類:  {kind}</Text>
-        <Text >文章:  {sentence}</Text>
+        <Text style={styles.flat_list_value_style}>種類:  {kind}</Text>
+        <Text style={styles.flat_list_value_style}>文章:  {sentence}</Text>
     </View>
   );
 
@@ -190,12 +190,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         padding: 10,
-        
+        marginBottom: 40
     },
     border: {
         flex:0.008,
         // fontSize: 20,
-        marginTop: 7,
+        // marginTop: 7,
         // paddingLeft: 10,
         // color: 'tomato',
         // alignItems: 'flex-end',
@@ -205,7 +205,14 @@ const styles = StyleSheet.create({
     },
     allitem:{
         flex: 0.1,
-        // backgroundColor: 'white'
+        backgroundColor: 'white',
+        // marginTop: 30
+        justifyContent: 'flex-end',
+    },
+    flat_list_value_style: {
+        paddingTop: 10,
+        paddingLeft: 10,
+        fontSize: 15
     }
     // border1 :{
     //     flex: 0.002,

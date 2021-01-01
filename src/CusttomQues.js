@@ -15,11 +15,13 @@ const db = SQLite.openDatabase('db');
 // const Stack = createStackNavigator();
 
 
+
+
 export default function CusttomQues() {
 
     const [new_kind, setNewKind] = useState("");
     const [new_Bunn, setNewBunn] = useState("");
-    
+    const [success_register, setSuccess_Register] = useState(false);
     
     function insertSentence(){
 
@@ -43,7 +45,7 @@ export default function CusttomQues() {
               );
             },
             () => {console.log('fail')},
-            () => {console.log('success1222')},
+            () => {console.log('success1222'), setSuccess_Register(true)},
             );
         }
 
@@ -87,7 +89,13 @@ export default function CusttomQues() {
     
 // }
 
-
+const Show_user_typed_value = () => (
+    <View style = {styles.hidden_value}>
+        <Text style = {styles.hidden_value_text}>種類:  {new_kind}</Text>
+        <Text style = {styles.hidden_value_text}>文章:  {new_Bunn}</Text>
+        <Text style = {styles.hidden_value_text1}>が追加されました</Text>
+    </View>
+)
 // useEffect(()=>{
 //     getUsername();
 // }, []);
@@ -151,6 +159,8 @@ export default function CusttomQues() {
                 </TouchableOpacity>
             </View>
 
+            {success_register == true && <Show_user_typed_value/>}
+
             <View style={styles.submit_button2}>
                 <TouchableOpacity style={{
                     backgroundColor: 'tomato',
@@ -164,6 +174,8 @@ export default function CusttomQues() {
                     }}>全て削除する</Text>
                 </TouchableOpacity>
             </View>
+
+            
         </SafeAreaView>
     );
 }
@@ -202,15 +214,35 @@ const styles = StyleSheet.create({
         
     },
     submit_button: {
-        padding: 5,
+        // padding: 5,
         flex: 0.18,
         alignItems: 'center',
         // backgroundColor: 'lightblue'
     },
     submit_button2: {
         padding: 5,
-        flex: 0.4,
+        flex: 0.1,
         alignItems: 'center',
         justifyContent: 'flex-end'
+    },
+    hidden_value: {
+        flex: 0.3,
+        // justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginLeft: 10,
+        // backgroundColor: 'red'
+        // paddingTop: 10
+    },
+    hidden_value_text: {
+        marginTop: 10,
+        flex: 0.3,
+        fontSize: 20,
+        // justifyContent: 'flex-start',
+        // alignItems: 'flex-start',
+        // backgroundColor: 'red'
+        // paddingTop: 10
+    },
+    hidden_value_text1: {
+        color: 'green'
     }
   });
