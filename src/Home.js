@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Mypage from './Mypage';
 import CusttomQues from './CusttomQues';
-
+import Myquestion from './Myquestion';
 
 const Stack = createStackNavigator();
 
@@ -58,10 +58,15 @@ export default function Home({navigation}) {
         >
             <Stack.Screen name ="Mypage" component={Mypage}
                       options={{
-                        title: 'マイページ'
+                        title: 'マイページ',
+                        headerTintColor: 'lightgrey',
+                        
                       }}
             />
-            <Stack.Screen name="CusttomQues" component={CusttomQues}/>
+            <Stack.Screen name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'lightgrey',}}/>
+            <Stack.Screen
+                options={{title: '質問リスト', headerTintColor: 'lightgrey',}}
+             name="Myquestion" component={Myquestion} />
         </Stack.Navigator>
     );
 }

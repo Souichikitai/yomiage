@@ -12,9 +12,49 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const db = SQLite.openDatabase('db');
 
+function insertSentence(kind, sentence){
+
+    console.log("insert is called");
+    // var kind = new_kind;
+    // var sentence = new_Bunn;
+
+    if(kind == "" || sentence == ""){
+        Alert.alert("新しく追加するものを入れてください");
+    }else{
+        console.log('insert sentence, kind:' + kind + "" + sentence)
+  
+        db.transaction(tx => {
+          tx.executeSql(
+            "INSERT INTO sentences" +
+    
+            "(kind, sentence)" + 
+    
+            " VALUES (?, ?);" ,
+            [kind, sentence]
+          );
+        },
+        () => {console.log('fail')},
+        () => {console.log('success1222')},
+        );
+    }
 
 
+  }
 
+//This function should only be executed when user initailly load this app
+const insertInitialData = () => {
+    insertSentence("自己分析", "自己紹介してください");
+    insertSentence("企業分析", "志望動機をお願いします");
+    insertSentence("未来分析", "三年後に何をしたいですか？");
+    insertSentence("自己分析", "学生時代に頑張ったことはなんですか？");
+    insertSentence("企業分析", "なぜその弊社なんですか？");
+    insertSentence("未来分析", "短期目標、中期目標、長期目標を教えてください");
+    insertSentence("自己分析", "自己PRをお願いします");
+    insertSentence("企業分析", "弊社と同業他社の違いはなんですか？");
+    insertSentence("未来分析", "どのようなコンサル、営業になりたいですか？");
+    insertSentence("自己分析", "長所と短所をお聞きしてもよろしいですか？");
+    console.log("Data has been stored succsessfully");
+}
 
 export default function Start() {
 
@@ -57,7 +97,7 @@ const createdatabase = () => {
             tx.executeSql(
                 'create table if not exists sentences (id integer primary key not null, kind text, sentence text);', // 実行したいSQL文
                 null, // SQL文の引数
-                () => {console.log('success_creattion')}, // 成功時のコールバック関数
+                () => {insertInitialData()}, // 成功時のコールバック関数
                 () => {console.log('fail')} // 失敗時のコールバック関数
             );
             },
@@ -66,11 +106,6 @@ const createdatabase = () => {
         )
     // }
 }
-
-
-
-
-
 
 const storeData = async () => {
     if(username==""){
@@ -185,8 +220,6 @@ const storeData = async () => {
         </TouchableOpacity>
 
         </View>
-
-
 
     </SafeAreaView>
 

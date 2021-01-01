@@ -31,14 +31,15 @@ const Tab = createBottomTabNavigator(
 
 const createYomiageStack = () => (
   <Stack.Navigator
+
     screenOptions={{
       headerStyle: {
         backgroundColor: 'tomato',
         
-      }
+      }, 
     }}    
   >
-    <Stack.Screen name="Yomiage" component={Yomiage} options={{title: '読み上げ'}}/>
+    <Stack.Screen name="Yomiage" component={Yomiage} options={{title: '読み上げ', headerTintColor: 'lightgrey',}}/>
   </Stack.Navigator>
 )
 
@@ -46,11 +47,12 @@ const createSettingStack = () => (
   <Stack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: 'tomato'
+        backgroundColor: 'tomato',
+        
       }
     }}
   >
-    <Stack.Screen name="Setting" component={Setting} options={{title: '設定'}} />
+    <Stack.Screen name="Setting" component={Setting} options={{title: '設定' , headerTintColor: 'lightgrey',}} />
   </Stack.Navigator>
 )
 
@@ -122,7 +124,8 @@ export default function Authscreen() {
                 
                 <Tab.Screen 
                 options={{
-                  title: 'マイページ'
+                  title: 'マイページ',
+                  
                 }}
                 name="Home" component={createHomeStack}          
                 />
@@ -130,6 +133,7 @@ export default function Authscreen() {
                     name="Yomiage" component={createYomiageStack}
                     options={{
                       title: '読み上げ',
+
                     }}
                 />
                 <Tab.Screen 
