@@ -28,15 +28,7 @@ const db = SQLite.openDatabase('db');
 //     </FlatList>
 // }
 
-const Flat_list = ({ kind, sentence }) => (
-    <View style={styles.allitem}>
-        <View style={styles.border}>
-            <Text style={{fontSize: 2}}>fe</Text>
-        </View>
-        <Text style={styles.flat_list_value_style}>種類:  {kind}</Text>
-        <Text style={styles.flat_list_value_style}>文章:  {sentence}</Text>
-    </View>
-  );
+
 
   const No_value_view = () => (
     <View>
@@ -66,7 +58,8 @@ export default function Myquestion({navigation}) {
     const [Data_array, setData_array] = useState([]);
     const [all_button, setAllbutton] = useState(false);
     const [custom_button, setCustombutton] = useState(false);
-
+    const [selected_kind, setSelectedKind] = useState("");
+    const [selected_sent, setSelectedsent] = useState("");
 
 
     const getallDatafrom =() => {
@@ -89,8 +82,8 @@ export default function Myquestion({navigation}) {
                     Alert.alert('データベースが空です');
                 }
                 setData_array(rows._array);
-                setCustombutton(false);
-                setAllbutton(true);
+                // setCustombutton(false);
+                // setAllbutton(true);
             }
             );
         },
@@ -98,36 +91,116 @@ export default function Myquestion({navigation}) {
         (_t, _success) => { console.log("loaded sentences")}
         );
     }
-    
-    
-    // function insertSentence(){
 
-    //     console.log("insert is called");
-    //     var kind = new_kind;
-    //     var sentence = new_Bunn;
+    const remove_item=(dsent)=>{
 
-    //     if(new_kind == "" || new_Bunn == ""){
-    //         Alert.alert("新しく追加するものを入れてください");
-    //     }else{
-    //         console.log('insert sentence, kind:' + kind + "" + sentence)
-      
-    //         db.transaction(tx => {
-    //           tx.executeSql(
-    //             "INSERT INTO sentences" +
         
-    //             "(kind, sentence)" + 
         
-    //             " VALUES (?, ?);" ,
-    //             [kind, sentence]
-    //           );
+        console.log(dsent);
+
+        db.transaction(
+            tx => {
+                tx.executeSql(
+                "delete from sentences where sentence = ?",
+                [dsent],
+                (_, { rows}) => {
+                    console.log(" Result is:  " + JSON.stringify(rows._array));
+                    // if(JSON.stringify(rows._array) == "[]"){
+                    //     Alert.alert('データベースが空です');
+                    // }
+                    setData_array(rows._array);
+                    // setCustombutton(false);
+                    // setAllbutton(true);
+                }
+                );
+            },
+            (t, error) => { console.log("db error load sentences"); console.log(error) },
+            (_t, _success) => { console.log("loaded sentences")}
+            );
+
+            getallDatafrom();
+    }
+
+
+    const Flat_list = ({ kind, sentence }) => (
+        <View style={styles.allitem}>
+            <TouchableOpacity onPress={()=> {
+            //    console.log(kind +" " + sentence); 
+                console.log(kind);
+                console.log(sentence);
+ 
+
+            }}>
+            <View style={styles.border}>
+                <Text style={{fontSize: 2}}>fe</Text>
+            </View>
+            <Text style={styles.flat_list_value_style}>種類:  {kind}</Text>
+            <Text style={styles.flat_list_value_style}>文章:  {sentence}</Text>
+
+            </TouchableOpacity>
+            {/* <Button title="delete" /> */}
+            <TouchableOpacity  style={{
+                alignItems:'flex-end',
+                marginRight:5
+            }}
+            onPress={()=>{
+                
+                // Alert.alert('削除しますか？', {canc});
+
+                Alert.alert(
+                    "削除しますか？",
+                    "",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                      },
+                      { text: "OK", onPress: () => remove_item(sentence)}
+                    ],
+                    { cancelable: false }
+                  );
+
+                setSelectedKind(kind);
+                setSelectedsent(sentence);
+                console.log("test" + selected_sent);
+                
+                
+            }}>
+                <Text style={{color:'blue'}}>削除</Text>
+            </TouchableOpacity>
+        </View>
+      );
+    
+    // const getpersonaldata = () =>{
+    //     db.transaction(
+    //         tx => {
+    //             tx.executeSql(
+    //             "select * from sentences where kind = '自己分析'",
+    //             [],
+    //             // (_, { rows: { _array } }) => {
+    //             //     var items = JSON.stringify(_array)
+    //             //     setSentecesfrom(items)
+    //             //     // setSentecesfrom(_array)
+    //             //     console.log(" sentences")
+    //             // }
+        
+    //             (_, { rows}) => {
+    //                 console.log(" Result is:  " + JSON.stringify(rows._array));
+    //                 if(JSON.stringify(rows._array) == "[]"){
+    //                     Alert.alert('データベースが空です');
+    //                 }
+    //                 setData_array(rows._array);
+    //                 // setCustombutton(false);
+    //                 // setAllbutton(true);
+    //             }
+    //             );
     //         },
-    //         () => {console.log('fail')},
-    //         () => {console.log('success1222')},
+    //         (t, error) => { console.log("db error load sentences"); console.log(error) },
+    //         (_t, _success) => { console.log("loaded sentences")}
     //         );
-    //     }
+    // }
 
-
-    //   }
     
 // const dispatch = useDispatch();
 
@@ -138,37 +211,43 @@ export default function Myquestion({navigation}) {
 // const [username, setUsername] = useState("");
 
 
-// useEffect(()=>{
-//     getUsername();
-// }, []);
+useEffect(()=>{
+    getallDatafrom();
+}, []);
     
     return(
     <SafeAreaView style={styles.container}>
         {/* <ScrollView > */}
             
             <View style={styles.button1}>
-                <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
+                {/* <Text style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}>全て</Text> */}
+                {/* <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
                     onPress={getallDatafrom}
                 >
                     <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>全質問を表示する</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{borderRadius:10, padding:15 , marginLeft: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20, }}>
-                    <Text style={{fontSize: 17, fontWeight: "500", color: 'tomato'}}>カスタム質問を表示する</Text>
+                <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
+                    onPress={showallresult}
+                >
+                    <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>企業分析</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
+                    onPress={getpersonaldata}
+                >
+                    <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>自己分析</Text>
+                </TouchableOpacity> */}
+                {/* <TouchableOpacity style={{borderRadius:10, padding:15 , marginLeft: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20, }}
+                    onPress={()=> {
+                        console.log("touched");
+                    }}
+                >
+                    <Text style={{fontSize: 17, fontWeight: "500", color: 'tomato'}}>カスタム質問を表示する</Text>
+                </TouchableOpacity> */}
             </View>
 
-            {/* {all_button == true && custom_button ==false ? (): ()} */}
-            {/* {all_button == true ? (<FlatList data={Data_array} renderItem={renderItem} keyExtractor={item => item.id}/>)
-                : (null)} */}
-            {(() => {
-            if (all_button == true && custom_button == false) {
-                return(<FlatList data={Data_array} renderItem={renderItem} keyExtractor={item => item.id}/>);
-            } else if(custom_button == true && all_button== false){
 
-            } else if(all_button == false && custom_button == false){
-                return(null);
-            }
-        })()}
+
+        <FlatList data={Data_array} renderItem={renderItem} keyExtractor={item => item.id}/>
             
         {/* </ScrollView> */}
         </SafeAreaView>
@@ -189,8 +268,8 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red',
         flexDirection: 'row',
         justifyContent: 'center',
-        padding: 10,
-        marginBottom: 40
+        // padding: 10,
+        // marginBottom: 40
     },
     border: {
         flex:0.008,
@@ -212,7 +291,8 @@ const styles = StyleSheet.create({
     flat_list_value_style: {
         paddingTop: 10,
         paddingLeft: 10,
-        fontSize: 15
+        fontSize: 15,
+        backgroundColor:'lightgrey'
     }
     // border1 :{
     //     flex: 0.002,

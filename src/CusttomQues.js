@@ -21,6 +21,8 @@ export default function CusttomQues() {
 
     const [new_kind, setNewKind] = useState("");
     const [new_Bunn, setNewBunn] = useState("");
+    const [adding_kind, setAddingKind] = useState("");
+    const [adding_sentences, setAddingSentence] = useState("");
     const [success_register, setSuccess_Register] = useState(false);
     
     function insertSentence(){
@@ -63,6 +65,22 @@ export default function CusttomQues() {
         () => {console.log('fail')},
         () => {console.log('success')},
         );
+    }
+
+    function change_kind_personal(){
+        setNewKind("自己分析");
+    }
+
+    function change_kind_company(){
+        setNewKind("企業分析");
+    }
+
+    function change_kind_future(){
+        setNewKind("未来分析");
+    }
+
+    function change_kind_others(){
+        setNewKind("その他");
     }
     
 // const dispatch = useDispatch();
@@ -110,7 +128,7 @@ const Show_user_typed_value = () => (
                     marginBottom: 10,
                     marginLeft: 10,
                 }}>+ 新しく種類を追加する</Text>
-                <TextInput
+                {/* <TextInput
                     style={{
                         backgroundColor: 'white',
                         padding: 10,
@@ -120,7 +138,35 @@ const Show_user_typed_value = () => (
                     placeholder="種類"
                     placeholderTextColor="grey"
                     onChangeText={text => setNewKind(text)}
-                ></TextInput>
+                ></TextInput> */}
+
+                <View style = {styles.kindlist}>
+                <TouchableOpacity onPress={change_kind_personal}>
+                    <Text style={styles.kindeachlist}>
+                        自己分析
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={change_kind_company}>
+                    <Text style={styles.kindeachlist}>
+                        企業分析
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={change_kind_future}>
+                    <Text style={styles.kindeachlist}>
+                        未来分析
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={change_kind_others}>
+                    <Text style={styles.kindeachlist}>
+                        その他
+                    </Text>
+                </TouchableOpacity>
+
+
+                </View>
             </View>
             <View style={styles.border1}>
                     <Text>hello</Text>
@@ -144,12 +190,24 @@ const Show_user_typed_value = () => (
                     onChangeText={text => setNewBunn(text)}
                 ></TextInput>
             </View>
+
+
+            <View style={styles.expression}>
+                <Text style={styles.expressiontext}>
+                    種類 : {new_kind}
+                </Text>
+                <Text style={styles.expressiontext}>
+                    文章 : {new_Bunn}
+                </Text> 
+            </View>
+
+
             <View style={styles.submit_button}>
                 <TouchableOpacity style={{
                     backgroundColor: 'tomato',
                     padding: 27,
                     borderRadius: 30,
-                    marginTop: 10
+                    marginTop: 20
                 }}
                 onPress={insertSentence}
                 >
@@ -164,8 +222,8 @@ const Show_user_typed_value = () => (
             <View style={styles.submit_button2}>
                 <TouchableOpacity style={{
                     backgroundColor: 'tomato',
-                    padding: 27,
-                    borderRadius: 30
+                    padding: 23,
+                    borderRadius: 30,
                 }}
                 onPress={deleteAll}
                 >
@@ -244,5 +302,34 @@ const styles = StyleSheet.create({
     },
     hidden_value_text1: {
         color: 'green'
+    },
+    kindlist:{
+        // backgroundColor: 'lightgreen',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginTop: 10,
+       
+        
+    },
+    kindeachlist:{
+        backgroundColor: 'white',
+        fontSize: 25,
+        padding: 4,
+        margin: 5,
+        borderRadius: 15
+    },
+    expression:{
+        
+        marginTop: 10,
+        marginLeft: 10,
+        justifyContent: 'center',
+        // alignItems: 'center'
+    },
+    expressiontext:{
+        fontSize:20,
+        margin:10
+        // alignItems: 'center',
+        
     }
   });

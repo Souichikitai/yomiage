@@ -47,7 +47,7 @@ const insertInitialData = () => {
     insertSentence("企業分析", "志望動機をお願いします");
     insertSentence("未来分析", "三年後に何をしたいですか？");
     insertSentence("自己分析", "学生時代に頑張ったことはなんですか？");
-    insertSentence("企業分析", "なぜその弊社なんですか？");
+    insertSentence("企業分析", "なぜ弊社なんですか？");
     insertSentence("未来分析", "短期目標、中期目標、長期目標を教えてください");
     insertSentence("自己分析", "自己PRをお願いします");
     insertSentence("企業分析", "弊社と同業他社の違いはなんですか？");
