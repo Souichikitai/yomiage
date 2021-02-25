@@ -17,10 +17,26 @@ export default function Setting({navigation}) {
             await AsyncStorage.removeItem('UserName');
             console.log('item removed');
             deleteuserinfo();
+            // deleteTable();
             return true;
         }catch(e){
             return false;
         }
+    }
+
+    function deleteTable(){
+        console.log("Delete table")
+      
+        db.transaction(tx => {
+          tx.executeSql(
+            "drop table companys;"
+          );
+        },
+        () => {console.log('fail')},
+        () => {console.log('successfully delete table******')},
+        );
+
+        // getallCDatafrom();
     }
 
     return(
@@ -38,6 +54,12 @@ export default function Setting({navigation}) {
             </TouchableOpacity>
             
         </View>
+        {/* <View style={styles.setting1}>
+            <TouchableOpacity onPress={removeItemValue}>
+                <Text>* テーブルを削除する</Text>
+            </TouchableOpacity>
+            
+        </View> */}
 
 
 
@@ -55,6 +77,7 @@ const styles = StyleSheet.create({
     },
     setting1: {
         alignItems: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        marginBottom: 10
     }
   });

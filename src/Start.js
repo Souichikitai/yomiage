@@ -12,6 +12,19 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const db = SQLite.openDatabase('db');
 
+function checkiftableExsist(){
+    console.log("Deleting table")
+      
+    db.transaction(tx => {
+      tx.executeSql(
+        "drop table companys;"
+      );
+    },
+    () => {console.log('fail')},
+    () => {console.log('successfully delete table******')},
+    );
+}
+
 function insertSentence(kind, sentence){
 
     console.log("insert is called");
@@ -74,9 +87,10 @@ forceRemount = async() => {
         if( value !== null) {
          
             if(username !== ""){
+                // checkiftableExsist();
                 createdatabase();
                 create_company_database();
-                
+
                 dispatch({type:"CHANGE_USER_STATE_TRUE"})
             }else{
                 Alert.alert("ユーザーネームを入れてください");
@@ -113,7 +127,7 @@ const create_company_database = () => {
 
         db.transaction(tx => {
             tx.executeSql(
-                'create table if not exists companys (id integer primary key not null, company_name text, date text, round text, sentence text);', // 実行したいSQL文
+                'create table if not exists companys (id integer primary key not null, company_name text, date text, round text, sentence text, note text);', // 実行したいSQL文
                 null, // SQL文の引数
                 () => {console.log('*Comanys database has successfully created *')}, // 成功時のコールバック関数
                 () => {console.log('*Conpamy fail')} // 失敗時のコールバック関数

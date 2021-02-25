@@ -33,7 +33,8 @@ export default function CompanyList({navigation}) {
     const [new_cname, setNewCname] = useState("");
     const [new_date, setNewDate] = useState("");
     const [new_round, setNewRound] = useState("");
-    // const [new_bunn, setNewBunn] = useState("");
+    const [new_bunn, setNewBunn] = useState("");
+    const [new_note, setNewNote] = useState("");
     const [CData_array, setCData_array] = useState([]);
 
     const getallCDatafrom =() => {
@@ -73,20 +74,22 @@ export default function CompanyList({navigation}) {
         var company_name = new_cname;
         var date = new_date;
         var round = new_round;
+        var sentence = new_bunn;
+        var note = new_note;
 
         if(new_cname == "" || new_date == "" || new_round == ""){
             Alert.alert("新しく追加するものを入れてください");
         }else{
-            console.log('insert company details: ' + company_name + "," + date + "," + round)
+            console.log('insert company details: ' + company_name + "," + date + "," + round + "sentence: " + sentence + "note: " + note )
     
             db.transaction(tx => {
             tx.executeSql(
                 "INSERT INTO companys" +
         
-                "(company_name, date, round)" + 
+                "(company_name, date, round, sentence, note)" + 
         
-                " VALUES (?, ?, ?);" ,
-                [company_name, date, round]
+                " VALUES (?, ?, ? ,? ,?);" ,
+                [company_name, date, round, sentence, note]
             );
             },
             () => {console.log('企業別履歴　保存失敗')},
@@ -112,10 +115,10 @@ export default function CompanyList({navigation}) {
         getallCDatafrom();
     }
 
-    const Flat_list_company = ({ id, c_name, date, round}) => (
+    const Flat_list_company = ({ id, c_name, date, round, note}) => (
         <View style={styles.allitem}>
             <TouchableOpacity style={styles.koko} onPress={()=> {
-                console.log(id + "" + c_name + "" + date + "" + round), 
+                console.log(id + "" + c_name + "" + date + "" + round + "" + note), 
                 navigation.navigate('CompanyDetail', {
                     id: id,
                     c_name: c_name,
@@ -127,6 +130,7 @@ export default function CompanyList({navigation}) {
                 <Text style={styles.flat_list_value_style}>企業名:  {c_name}</Text>
                 <Text style={styles.flat_list_value_style}>日付:  {date}</Text>
                 <Text style={styles.flat_list_value_style}>面接状況:  {round}</Text>
+                {/* <Text style={styles.flat_list_value_style}>メモ:  {note}</Text> */}
 
             </TouchableOpacity>
 
