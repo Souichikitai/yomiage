@@ -195,7 +195,7 @@ export default function CompanyList({navigation}) {
                             <Text style={styles.modalText}>会社名</Text>
                             <TextInput
                             style={{
-                                fontSize: 16,
+                                fontSize: 20,
                                 paddingVertical: 5,
                                 paddingHorizontal: 10,
                                 borderWidth: 1,
@@ -213,7 +213,7 @@ export default function CompanyList({navigation}) {
                         <Text style={styles.modalText}>日付</Text>
                             <TextInput
                             style={{
-                                fontSize: 16,
+                                fontSize: 20,
                                 paddingVertical: 5,
                                 paddingHorizontal: 10,
                                 borderWidth: 1,
@@ -221,7 +221,7 @@ export default function CompanyList({navigation}) {
                                 borderRadius: 4,
                                 color: '#789',
                                 marginBottom: 5,
-                                textAlign: 'center'
+                                textAlign: 'center',
                             }}
                             placeholder="○月○日"
                             placeholderTextColor="grey"
@@ -237,7 +237,7 @@ export default function CompanyList({navigation}) {
                                     { label: '第二次面接', value: '第二次面接' },
                                     { label: '第三次面接', value: '第三次面接' },
                                     { label: '第四次面接', value: '第四次面接' },
-                                    { label: '最終面接', value: '第最終面接' },
+                                    { label: '最終面接', value: '最終面接' },
                                     { label: '面談', value: '面談' }
                                 ]}
                                 style={styles}
@@ -256,7 +256,7 @@ export default function CompanyList({navigation}) {
 
                         
                             <Pressable
-                            style={[styles.button, styles.buttonClose]}
+                            style={[styles.button, styles.buttonClose2]}
                             onPress={() => setModalVisible(!modalVisible)}
                             >
                                  <Text style={styles.textStyle}>閉じる</Text>
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
     inputIOS: {
         fontSize: 16,
         paddingVertical: 5,
-        paddingHorizontal: 10,
+        paddingHorizontal: 20,
         borderWidth: 1,
         borderColor: '#789',
         borderRadius: 4,
@@ -327,6 +327,7 @@ const styles = StyleSheet.create({
         flex: 15,
         alignItems: 'center',
         justifyContent: 'center',
+        marginTop: 5
         // backgroundColor: 'pink'
     },
     plusbutton: {
@@ -353,7 +354,7 @@ const styles = StyleSheet.create({
         marginTop: 90,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 55,
+        padding: 60,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -368,26 +369,42 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         padding: 10,
         elevation: 2,
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop:30,
+        paddingLeft: 30,
+        paddingRight: 30
       },
       button: {
         borderRadius: 20,
         padding: 10,
+
         elevation: 2,
         // marginBottom: 10
       },
       buttonOpen: {
         backgroundColor: "tomato",
+        
       },
       buttonClose: {
-        backgroundColor: "#2196F3",
+        backgroundColor: "tomato",
         // fontSize: 
+        fontWeight: "bold",
+
       },
+
+      buttonClose2:{
+        backgroundColor: "grey",
+        color: 'black',
+        // fontSize: 
+        fontWeight: "bold"
+      },
+
       textStyle: {
         color: "white",
         fontWeight: "bold",
         textAlign: "center",
         // marginTop: 10,
+        fontSize:20
         
       },
 
@@ -395,18 +412,18 @@ const styles = StyleSheet.create({
       modalText: {
         marginBottom: 8,
         textAlign: "center",
-        fontSize: 20
+        fontSize: 25,
+        marginTop: 10
       },
       flat_list_value_style: {
         paddingTop: 10,
         paddingLeft: 100,
         paddingRight: 100,
-        fontSize: 15,
+        fontSize: 18,
 
         backgroundColor:'lightgrey',
         color: 'darkslategrey'
         
-
     },
     allitem:{
         flex: 0.1,

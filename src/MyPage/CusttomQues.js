@@ -99,13 +99,13 @@ const Show_user_typed_value = () => (
                 <Text style={{
                     fontSize: 30,
                     paddingTop: 20,
-                    marginBottom: 10,
+                    // marginBottom: ,
                     marginLeft: 10,
                 }}>+ 新しく種類を追加する</Text>
 
                 <View style = {styles.kindlist}>
                 <TouchableOpacity onPress={change_kind_personal}>
-                    <Text style={styles.kindeachlist}>
+                    <Text style={styles.kindeachlist1}>
                         自己分析
                     </Text>
                 </TouchableOpacity>
@@ -123,7 +123,7 @@ const Show_user_typed_value = () => (
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={change_kind_others}>
-                    <Text style={styles.kindeachlist}>
+                    <Text style={styles.kindeachlist4}>
                         その他
                     </Text>
                 </TouchableOpacity>
@@ -185,7 +185,7 @@ const Show_user_typed_value = () => (
             <View style={styles.submit_button2}>
                 <TouchableOpacity style={{
                     backgroundColor: 'tomato',
-                    padding: 23,
+                    padding: 20,
                     borderRadius: 30,
                 }}
                 onPress={deleteAll}
@@ -277,11 +277,27 @@ const styles = StyleSheet.create({
     },
     kindeachlist:{
         backgroundColor: 'white',
-        fontSize: 25,
+        fontSize: 22,
         padding: 4,
         margin: 5,
         borderRadius: 15
     },
+    kindeachlist1:{
+        backgroundColor: 'white',
+        fontSize: 22,
+        padding: 4,
+        margin: 5,
+        borderRadius: 15,
+        marginLeft: 10
+    },
+    kindeachlist4:{
+        backgroundColor: 'white',
+        fontSize: 22,
+        padding: 4,
+        margin: 5,
+        borderRadius: 15
+    },
+
     expression:{
         
         marginTop: 10,
