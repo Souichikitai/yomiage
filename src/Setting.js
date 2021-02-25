@@ -17,6 +17,7 @@ export default function Setting({navigation}) {
             await AsyncStorage.removeItem('UserName');
             console.log('item removed');
             deleteuserinfo();
+            //reset table columns
             // deleteTable();
             return true;
         }catch(e){

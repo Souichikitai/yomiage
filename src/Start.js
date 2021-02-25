@@ -87,6 +87,7 @@ forceRemount = async() => {
         if( value !== null) {
          
             if(username !== ""){
+                //reset table columns
                 // checkiftableExsist();
                 createdatabase();
                 create_company_database();

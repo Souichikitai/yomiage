@@ -16,6 +16,7 @@ export default function CompanyDetail({route, navigation}) {
 
     const {id} = route.params;
     const {c_name} = route.params;
+    const {round} = route.params;
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.modoru}>
@@ -28,6 +29,7 @@ export default function CompanyDetail({route, navigation}) {
             <View style={styles.listbutton}>
                 <Text>id: {JSON.stringify(id)}</Text>
                 <Text>Company Name: {JSON.stringify(c_name)}</Text>
+                <Text>{JSON.stringify(round)}</Text>
             </View>
         </SafeAreaView>
     );

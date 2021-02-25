@@ -122,6 +122,7 @@ export default function CompanyList({navigation}) {
                 navigation.navigate('CompanyDetail', {
                     id: id,
                     c_name: c_name,
+                    round: round
                   });
                 // navigation.navigate('CompanyDetail')
                 }}>
