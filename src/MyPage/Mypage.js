@@ -146,12 +146,12 @@ useEffect(()=>{
                 <TouchableOpacity style={{borderRadius:20 ,paddingTop: 46, padding:15, marginRight: 10, width: 180, height: 125, backgroundColor: 'tomato', fontSize: 20}} 
                     onPress={() => navigation.navigate('Myquestion')}
                 >
-                    <Text style={{fontSize: 35, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>My 質問</Text>
+                    <Text style={{fontSize: 35, fontWeight: "500", textAlign: 'center', color: 'white'}}>My 質問</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={{borderRadius:20, paddingTop: 52, width: 170,padding:15 ,  height: 125, backgroundColor: 'tomato', fontSize: 20,}}
                     onPress={() => navigation.navigate('CompanyNavigator')}
                 >
-                    <Text style={{fontSize: 28, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>企業別履歴</Text>
+                    <Text style={{fontSize: 28, fontWeight: "500", textAlign: 'center', color: 'white'}}>企業別履歴</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.button1}>

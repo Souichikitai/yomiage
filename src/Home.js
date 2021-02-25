@@ -76,20 +76,20 @@ export default function Home({navigation}) {
             <Stack.Screen name ="Mypage" component={Mypage}
                       options={{
                         title: 'マイページ',
-                        headerTintColor: 'lightgrey',
+                        headerTintColor: 'white',
                         
                       }}
             />
             <Stack.Screen 
-                name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'lightgrey',title: "質問編集"}}
+                name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'white',title: "質問編集"}}
             />
             <Stack.Screen
-                options={{title: '質問リスト', headerTintColor: 'lightgrey',}}
+                options={{title: '質問リスト', headerTintColor: 'white',}}
              name="Myquestion" component={Myquestion} />
 
              
             <Stack.Screen
-                options={{title: '企業別履歴', headerTintColor: 'lightgrey',}}
+                options={{title: '企業別履歴', headerTintColor: 'white',}}
              name="CompanyNavigator" component={createNavigatorStack} />
 
 

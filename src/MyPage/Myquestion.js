@@ -167,7 +167,7 @@ export default function Myquestion({navigation}) {
                 
                 
             }}>
-                <Text style={{color:'blue'}}>削除</Text>
+                <Text style={{color:'dimgray'}}>削除</Text>
             </TouchableOpacity>
         </View>
       );
@@ -236,7 +236,7 @@ useEffect(()=>{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'gainsboro',
+      backgroundColor: 'grey',
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
@@ -248,24 +248,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // padding: 10,
         // marginBottom: 40
+        
     },
     border: {
-        flex:0.008,
-
+        flex:0.004,
+        
         backgroundColor: 'grey',
 
     },
     allitem:{
         flex: 0.1,
         backgroundColor: 'white',
-
+        borderRadius: 10,
         justifyContent: 'flex-end',
     },
     flat_list_value_style: {
         paddingTop: 10,
         paddingLeft: 10,
-        fontSize: 15,
-        backgroundColor:'lightgrey',
+        fontSize: 17,
+        backgroundColor:'gainsboro',
+        borderRadius: 20
 
     }
 
