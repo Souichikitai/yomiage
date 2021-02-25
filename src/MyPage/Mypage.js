@@ -148,7 +148,9 @@ useEffect(()=>{
                 >
                     <Text style={{fontSize: 35, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>My 質問</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{borderRadius:20, paddingTop: 52, width: 170,padding:15 ,  height: 125, backgroundColor: 'tomato', fontSize: 20,}}>
+                <TouchableOpacity style={{borderRadius:20, paddingTop: 52, width: 170,padding:15 ,  height: 125, backgroundColor: 'tomato', fontSize: 20,}}
+                    onPress={() => navigation.navigate('CompanyNavigator')}
+                >
                     <Text style={{fontSize: 28, fontWeight: "500", textAlign: 'center', color: 'lightgrey'}}>企業別履歴</Text>
                 </TouchableOpacity>
             </View>
@@ -161,23 +163,6 @@ useEffect(()=>{
                 </TouchableOpacity>
             </View>
 
-
-
-
-{/* 
-            <Text style={{fontSize: 20, paddingBottom: 10}}>
-                種類は: {sentencesfrom.map((sent) => (
-                    <Text>{sent.kind}</Text>
-                ))}
-            </Text>
-            <Text style={{fontSize: 20}}>
-                文章は: {sentencesfrom.map((sent) => (
-                    <Text key={sent.id}>{sent.sentence}</Text>
-                ))}
-            </Text> */}
-
-            {/* <Button title="Yomiage" onPress={()=>navigation.navigate('Yomiage')} /> */}
-            {/* <Button title="remove storeage" onPress={removeItemValue}/> */}
         </SafeAreaView>
 
     );

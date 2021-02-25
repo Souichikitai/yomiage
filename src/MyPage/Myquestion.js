@@ -220,29 +220,7 @@ useEffect(()=>{
         {/* <ScrollView > */}
             
             <View style={styles.button1}>
-                {/* <Text style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}>全て</Text> */}
-                {/* <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
-                    onPress={getallDatafrom}
-                >
-                    <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>全質問を表示する</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
-                    onPress={showallresult}
-                >
-                    <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>企業分析</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{borderRadius:10 , padding: 15 ,marginRight: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20}}
-                    onPress={getpersonaldata}
-                >
-                    <Text style={{fontSize: 18, fontWeight: "500", color: 'tomato'}}>自己分析</Text>
-                </TouchableOpacity> */}
-                {/* <TouchableOpacity style={{borderRadius:10, padding:15 , marginLeft: 5, height: 50, backgroundColor: 'lightgrey', fontSize: 20, }}
-                    onPress={()=> {
-                        console.log("touched");
-                    }}
-                >
-                    <Text style={{fontSize: 17, fontWeight: "500", color: 'tomato'}}>カスタム質問を表示する</Text>
-                </TouchableOpacity> */}
+
             </View>
 
 
@@ -273,52 +251,22 @@ const styles = StyleSheet.create({
     },
     border: {
         flex:0.008,
-        // fontSize: 20,
-        // marginTop: 7,
-        // paddingLeft: 10,
-        // color: 'tomato',
-        // alignItems: 'flex-end',
-        //   alignItems: 'center',
+
         backgroundColor: 'grey',
-        // borderBottomColor: 'black',
+
     },
     allitem:{
         flex: 0.1,
         backgroundColor: 'white',
-        // marginTop: 30
+
         justifyContent: 'flex-end',
     },
     flat_list_value_style: {
         paddingTop: 10,
         paddingLeft: 10,
         fontSize: 15,
-        backgroundColor:'lightgrey'
+        backgroundColor:'lightgrey',
+
     }
-    // border1 :{
-    //     flex: 0.002,
-    //     backgroundColor: 'black'
-    // },
-    // sentencess: {
-    //     flex: 0.2,
-    //     fontSize: 20,
-    //     // marginTop: 10,
-    //     // paddingLeft: 10,
-    //     color: 'tomato',
-    //     // alignItems: 'flex-end',
-    //     //   alignItems: 'center',
-    //     backgroundColor: 'lightgrey'
-        
-    // },
-    // submit_button: {
-    //     padding: 5,
-    //     flex: 0.18,
-    //     alignItems: 'center',
-    //     // backgroundColor: 'lightblue'
-    // },
-    // submit_button2: {
-    //     padding: 5,
-    //     flex: 0.4,
-    //     alignItems: 'center',
-    //     justifyContent: 'flex-end'
-    // }
+
   });

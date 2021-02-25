@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Home from './Home';
 import Yomiage from './Yomiage';
 import Setting from './Setting';
-import Mypage from './Mypage'
+import Mypage from './MyPage/Mypage';
 
 
 const Stack = createStackNavigator();

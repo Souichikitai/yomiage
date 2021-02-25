@@ -5,35 +5,14 @@ import {useDispatch} from "react-redux";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Mypage from './MyPage/Mypage';
-import CusttomQues from './MyPage/CusttomQues';
-import Myquestion from './MyPage/Myquestion';
-import CompanyNavigator from './MyPage/CompanyNavigator';
+
+import CompanyList from './CompanyList';
+import CompanyDetail from './CompanyDetail';
 
 const Stack = createStackNavigator();
 
 
-
-const createNavigatorStack = () => (
-  <Stack.Navigator
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: 'tomato'
-      }
-    }}
-    headerMode='none'
-  >
-    <Stack.Screen 
-      name="CompanyNavigator" component={CompanyNavigator}
-      options={{
-        title: 'マイページ'
-      }}
-    />
-  </Stack.Navigator>
-
-)
-
-export default function Home({navigation}) {
+export default function CompanyNavigator({navigation}) {
 
 
     
@@ -65,35 +44,24 @@ export default function Home({navigation}) {
     return(
 
         <Stack.Navigator 
-            initialRouteName="Mypage"
-            // headerMode='none'
+            initialRouteName="CompanyList"
+            headerMode='none'
             screenOptions={{
                 headerStyle: {
                   backgroundColor: 'tomato'
                 }
               }}
         >
-            <Stack.Screen name ="Mypage" component={Mypage}
+            <Stack.Screen name ="CompanyList" component={CompanyList} headerMode='none'
                       options={{
-                        title: 'マイページ',
+                        title: '企業別履歴',
                         headerTintColor: 'lightgrey',
                         
                       }}
             />
             <Stack.Screen 
-                name="CusttomQues" component={CusttomQues} options={{headerTintColor: 'lightgrey',title: "質問編集"}}
+                name="CompanyDetail" component={CompanyDetail} options={{headerTintColor: 'lightgrey',title: "詳細"}}
             />
-            <Stack.Screen
-                options={{title: '質問リスト', headerTintColor: 'lightgrey',}}
-             name="Myquestion" component={Myquestion} />
-
-             
-            <Stack.Screen
-                options={{title: '企業別履歴', headerTintColor: 'lightgrey',}}
-             name="CompanyNavigator" component={createNavigatorStack} />
-
-
-
         </Stack.Navigator>
     );
 }

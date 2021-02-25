@@ -83,29 +83,6 @@ export default function CusttomQues() {
         setNewKind("その他");
     }
     
-// const dispatch = useDispatch();
-
-// const deleteuserinfo = () => {
-//     dispatch({type: "CHANGE_USER_STATE_FALSE"})
-// }
-
-// const [username, setUsername] = useState("");
-
-
-// const getUsername = async() =>{
-
-//         const value = await AsyncStorage.getItem('UserName')
-//         if( value !== null) {
-         
-//             setUsername(value);
-
-    
-//         }else{
-//           Alert.alert("ユーザーネームを取得できませんでした")
-      
-//         }
-    
-// }
 
 const Show_user_typed_value = () => (
     <View style = {styles.hidden_value}>
@@ -114,9 +91,6 @@ const Show_user_typed_value = () => (
         <Text style = {styles.hidden_value_text1}>が追加されました</Text>
     </View>
 )
-// useEffect(()=>{
-//     getUsername();
-// }, []);
     
     return(
 
@@ -128,17 +102,6 @@ const Show_user_typed_value = () => (
                     marginBottom: 10,
                     marginLeft: 10,
                 }}>+ 新しく種類を追加する</Text>
-                {/* <TextInput
-                    style={{
-                        backgroundColor: 'white',
-                        padding: 10,
-                        margin: 10,
-                        fontSize: 28,
-                    }}
-                    placeholder="種類"
-                    placeholderTextColor="grey"
-                    onChangeText={text => setNewKind(text)}
-                ></TextInput> */}
 
                 <View style = {styles.kindlist}>
                 <TouchableOpacity onPress={change_kind_personal}>
@@ -185,7 +148,7 @@ const Show_user_typed_value = () => (
                         margin: 10,
                         fontSize: 28,
                     }}
-                    placeholder="種類"
+                    placeholder="文章"
                     placeholderTextColor="grey"
                     onChangeText={text => setNewBunn(text)}
                 ></TextInput>

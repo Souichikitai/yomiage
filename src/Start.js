@@ -43,16 +43,16 @@ function insertSentence(kind, sentence){
 
 //This function should only be executed when user initailly load this app
 const insertInitialData = () => {
-    insertSentence("自己分析", "自己紹介してください");
-    insertSentence("企業分析", "志望動機をお願いします");
-    insertSentence("未来分析", "三年後に何をしたいですか？");
-    insertSentence("自己分析", "学生時代に頑張ったことはなんですか？");
-    insertSentence("企業分析", "なぜ弊社なんですか？");
-    insertSentence("未来分析", "短期目標、中期目標、長期目標を教えてください");
-    insertSentence("自己分析", "自己PRをお願いします");
-    insertSentence("企業分析", "弊社と同業他社の違いはなんですか？");
-    insertSentence("未来分析", "どのようなコンサル、営業になりたいですか？");
-    insertSentence("自己分析", "長所と短所をお聞きしてもよろしいですか？");
+    insertSentence("自己分析(デフォルト)", "自己紹介してください");
+    insertSentence("企業分析(デフォルト)", "志望動機をお願いします");
+    insertSentence("未来分析(デフォルト)", "三年後に何をしたいですか？");
+    insertSentence("自己分析(デフォルト)", "学生時代に頑張ったことはなんですか？");
+    insertSentence("企業分析(デフォルト)", "なぜ弊社なんですか？");
+    insertSentence("未来分析(デフォルト)", "短期目標、中期目標、長期目標を教えてください");
+    insertSentence("自己分析(デフォルト)", "自己PRをお願いします");
+    insertSentence("企業分析(デフォルト)", "弊社と同業他社の違いはなんですか？");
+    insertSentence("未来分析(デフォルト)", "どのようなコンサル、営業になりたいですか？");
+    insertSentence("自己分析(デフォルト)", "長所と短所をお聞きしてもよろしいですか？");
     console.log("Data has been stored succsessfully");
 }
 
@@ -115,11 +115,6 @@ const storeData = async () => {
             await AsyncStorage.setItem('UserName', username)
             console.log("Successfully stored")
             Alert.alert("Successfully stored")
-            // navigation.push('Main')
-            
-            
-            // forceRemount();
-            // console.log("kok:   " + GLOBAL.userstate)
             
         }catch(e){
             console.log(e)
@@ -128,11 +123,6 @@ const storeData = async () => {
 
 }
 
-// useEffect(() => {
-//     // createdatabase();
-// })
-
-// createdatabase();
 
     return(
 
@@ -150,15 +140,6 @@ const storeData = async () => {
                     <Image source={require('../image/0095.png') } style={{width: 220, height: 310, marginLeft: 100}}/>
 
                     </View>
-                {/* <Text style={{
-                            marginTop: 30,
-                            textAlign: 'center',
-                            fontSize: 20
-                        }}
-                        
-                        >
-                            このアプリをダウンロードしていただきまして 誠にありがとうございます
-                        </Text> */}
                         <Text style={{
                             marginTop: 30,
                             textAlign: 'center',
