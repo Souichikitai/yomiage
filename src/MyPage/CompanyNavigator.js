@@ -15,32 +15,6 @@ const Stack = createStackNavigator();
 export default function CompanyNavigator({navigation}) {
 
 
-    
-// const dispatch = useDispatch();
-
-// const deleteuserinfo = () => {
-//     dispatch({type: "CHANGE_USER_STATE_FALSE"})
-// }
-
-// const [username, setUsername] = useState("");
-
-
-// const getUsername = async() =>{
-
-//         const value = await AsyncStorage.getItem('UserName')
-//         if( value !== null) {
-         
-//             setUsername(value);
-
-    
-//         }else{
-//           Alert.alert("ユーザーネームを取得できませんでした")
-      
-//         }
-    
-// }
-
-    
     return(
 
         <Stack.Navigator 

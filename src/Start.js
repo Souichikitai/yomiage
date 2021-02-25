@@ -75,6 +75,8 @@ forceRemount = async() => {
          
             if(username !== ""){
                 createdatabase();
+                create_company_database();
+                
                 dispatch({type:"CHANGE_USER_STATE_TRUE"})
             }else{
                 Alert.alert("ユーザーネームを入れてください");
@@ -106,6 +108,24 @@ const createdatabase = () => {
         )
     // }
 }
+
+const create_company_database = () => {
+
+        db.transaction(tx => {
+            tx.executeSql(
+                'create table if not exists companys (id integer primary key not null, company_name text, date text, round text, sentence text);', // 実行したいSQL文
+                null, // SQL文の引数
+                () => {console.log('*Comanys database has successfully created *')}, // 成功時のコールバック関数
+                () => {console.log('*Conpamy fail')} // 失敗時のコールバック関数
+            );
+            },
+            () => {console.log('cfail')}, // 失敗時のコールバック関数
+            () => {console.log('')} // 成功時のコールバック関数
+        )
+    
+}
+
+
 
 const storeData = async () => {
     if(username==""){

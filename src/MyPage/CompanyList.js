@@ -1,17 +1,181 @@
 import React, {useEffect, useState} from 'react';
-import { StyleSheet, Text, View, Button, SafeAreaView, Modal , Pressable, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, SafeAreaView, Modal , Pressable, TextInput, List, FlatList, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from "react-redux";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import * as SQLite from "expo-sqlite";
+import RNPickerSelect from 'react-native-picker-select';
 
 // const Stack = createStackNavigator();
+
+const db = SQLite.openDatabase('db');
+
+const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: "86%",
+          backgroundColor: "#CED0CE",
+          marginLeft: "14%"
+        }}
+      />
+    );
+  };
 
 
 export default function CompanyList({navigation}) {
 
+    const companyRenderItem = ({item}) => <Flat_list_company id={item.id}  c_name={item.company_name} date={item.date} round={item.round}/>;
+
     const [modalVisible, setModalVisible] = useState(false);
+    const [new_cname, setNewCname] = useState("");
+    const [new_date, setNewDate] = useState("");
+    const [new_round, setNewRound] = useState("");
+    // const [new_bunn, setNewBunn] = useState("");
+    const [CData_array, setCData_array] = useState([]);
+
+    const getallCDatafrom =() => {
+
+        db.transaction(
+        tx => {
+            tx.executeSql(
+            'select * from companys',
+            [],
+            // (_, { rows: { _array } }) => {
+            //     var items = JSON.stringify(_array)
+            //     setSentecesfrom(items)
+            //     // setSentecesfrom(_array)
+            //     console.log(" sentences")
+            // }
+    
+            (_, { rows}) => {
+                console.log(" Result is:  " + JSON.stringify(rows._array));
+                if(JSON.stringify(rows._array) == "[]"){
+                    Alert.alert('データベースが空です');
+                }
+                setCData_array(rows._array);
+                // setCustombutton(false);
+                // setAllbutton(true);
+            }
+            );
+        },
+        (t, error) => { console.log("db error load sentences"); console.log(error) },
+        (_t, _success) => { console.log("loaded sentences")}
+        );
+    }
+
+    function insertCompanySentence(){
+
+        console.log("cinsert is called");
+
+        var company_name = new_cname;
+        var date = new_date;
+        var round = new_round;
+
+        if(new_cname == "" || new_date == "" || new_round == ""){
+            Alert.alert("新しく追加するものを入れてください");
+        }else{
+            console.log('insert company details: ' + company_name + "," + date + "," + round)
+    
+            db.transaction(tx => {
+            tx.executeSql(
+                "INSERT INTO companys" +
+        
+                "(company_name, date, round)" + 
+        
+                " VALUES (?, ?, ?);" ,
+                [company_name, date, round]
+            );
+            },
+            () => {console.log('企業別履歴　保存失敗')},
+            () => {console.log('企業別履歴　保存成功')},
+            );
+        }
+
+        getallCDatafrom();
+    }
+
+    function deleteCAll(){
+        console.log("Delete all")
+      
+        db.transaction(tx => {
+          tx.executeSql(
+            "delete from companys;"
+          );
+        },
+        () => {console.log('fail')},
+        () => {console.log('success')},
+        );
+
+        getallCDatafrom();
+    }
+
+    const Flat_list_company = ({ id, c_name, date, round}) => (
+        <View style={styles.allitem}>
+            <TouchableOpacity style={styles.koko} onPress={()=> {
+                console.log(id + "" + c_name + "" + date + "" + round), 
+                navigation.navigate('CompanyDetail', {
+                    id: id,
+                    c_name: c_name,
+                  });
+                // navigation.navigate('CompanyDetail')
+                }}>
+            
+                {/* <Text style={styles.flat_list_value_style}>{id}</Text> */}
+                <Text style={styles.flat_list_value_style}>企業名:  {c_name}</Text>
+                <Text style={styles.flat_list_value_style}>日付:  {date}</Text>
+                <Text style={styles.flat_list_value_style}>面接状況:  {round}</Text>
+
+            </TouchableOpacity>
+
+            {/* <Button title="delete" /> */}
+            <TouchableOpacity  style={{
+                alignItems:'flex-end',
+                marginRight:5
+            }}
+            onPress={deleteCAll}
+            // onPress={()=>{
+                
+            //     // Alert.alert('削除しますか？', {canc});
+
+            //     Alert.alert(
+            //         "削除しますか？",
+            //         "",
+            //         [
+            //           {
+            //             text: "Cancel",
+            //             onPress: () => console.log("Cancel Pressed"),
+            //             style: "cancel"
+            //           },
+            //           { text: "OK", onPress: () => remove_item(sentence)}
+            //         ],
+            //         { cancelable: false }
+            //       );
+
+            //     // setSelectedKind(kind);
+            //     // setSelectedsent(sentence);
+            //     // console.log("test" + selected_sent);
+                
+                
+            // }}
+            >
+                <Text style={{color:'grey', margin:2}}>削除</Text>
+            </TouchableOpacity>
+        </View>
+      );
+
+    // function onpressCheck(){
+    //     console.log(new_cname);
+    //     console.log(new_date);
+    //     console.log(new_round);
+    //     console.log("test dayo");
+    // }
+
+    useEffect(()=>{
+        getallCDatafrom();
+    }, []);
 
     return(
         <SafeAreaView style={styles.container}>
@@ -31,48 +195,61 @@ export default function CompanyList({navigation}) {
                             <Text style={styles.modalText}>会社名</Text>
                             <TextInput
                             style={{
-                                backgroundColor: 'lightgrey',
-                                paddingLeft: 35,
-                                paddingRight: 35,
+                                fontSize: 16,
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                borderWidth: 1,
+                                borderColor: '#789',
+                                borderRadius: 4,
+                                color: '#789',
                                 marginBottom: 5,
-                                fontSize: 17,
+                                textAlign: 'center'
                             }}
                             placeholder="〜株式会社"
                             placeholderTextColor="grey"
-                            // onChangeText={text => setNewBunn(text)}
+                            onChangeText={text => setNewCname(text)}
                         ></TextInput>
 
                         <Text style={styles.modalText}>日付</Text>
                             <TextInput
                             style={{
-                                backgroundColor: 'lightgrey',
-                                paddingLeft: 35,
-                                paddingRight: 35,
+                                fontSize: 16,
+                                paddingVertical: 5,
+                                paddingHorizontal: 10,
+                                borderWidth: 1,
+                                borderColor: '#789',
+                                borderRadius: 4,
+                                color: '#789',
                                 marginBottom: 5,
-                                fontSize: 17,
+                                textAlign: 'center'
                             }}
                             placeholder="○月○日"
                             placeholderTextColor="grey"
-                            // onChangeText={text => setNewBunn(text)}
+                            onChangeText={text => setNewDate(text)}
                         ></TextInput>
 
-                        <Text style={styles.modalText}>状況</Text>
-                            <TextInput
-                            style={{
-                                backgroundColor: 'lightgrey',
-                                paddingLeft: 35,
-                                paddingRight: 35,
-                                marginBottom: 5,
-                                fontSize: 17,
-                            }}
-                            placeholder=""
-                            placeholderTextColor="grey"
-                            // onChangeText={text => setNewBunn(text)}
-                        ></TextInput>
+                                <Text style={styles.modalText}>状況</Text>
+                                {/* <Text style={{ marginVertical: 20, marginLeft: 30 }}>状況</Text> */}
+                                <RNPickerSelect
+                                onValueChange={(value) => setNewRound(value)}
+                                items={[
+                                    { label: '第一次面接', value: '第一次面接' },
+                                    { label: '第二次面接', value: '第二次面接' },
+                                    { label: '第三次面接', value: '第三次面接' },
+                                    { label: '第四次面接', value: '第四次面接' },
+                                    { label: '最終面接', value: '第最終面接' },
+                                    { label: '面談', value: '面談' }
+                                ]}
+                                style={styles}
+                                placeholder={{ label: '選択してください', value: '' }}
+                                // Icon={() => (<Text style={{ position: 'absolute', right: 95, top: 10, fontSize: 18, color: '#789' }}>▼</Text>)}
+                                />
+                 
+                        
 
                             <Pressable 
                             style={[styles.button1, styles.buttonClose]}
-                            // onPress={() => setModalVisible(!modalVisible)}
+                            onPress={insertCompanySentence}
                             >
                                  <Text style={styles.textStyle}>保存</Text>
                             </Pressable>
@@ -93,19 +270,53 @@ export default function CompanyList({navigation}) {
                     >
                         <Text style={styles.textStyle}>＋新規追加</Text>
                     </Pressable>
+
+                    {/* <List> */}
+
+                    {/* </List> */}
             </View>
             
             
             <View style={styles.listbutton}>
-                <TouchableOpacity onPress={() => navigation.navigate('CompanyDetail')}>
+            <FlatList
+                            data={CData_array}
+                            renderItem={companyRenderItem}
+                            // renderItem={({ item }) => (
+                            //     <ListItem
+                            //       roundAvatar
+                            //       company_name={item.company_name}
+                            //       date={item.date}
+                            //       round={item.round}
+                            //       containerStyle={{borderBottomWidth: 0}}
+                            //     />
+                            //   )}
+                            keyExtractor={item => item.id}
+                            ItemSeparatorComponent={renderSeparator}
+                        />
+                {/* <TouchableOpacity onPress={() => navigation.navigate('CompanyDetail')}>
                     
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
+    inputIOS: {
+        fontSize: 16,
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        borderWidth: 1,
+        borderColor: '#789',
+        borderRadius: 4,
+        color: '#789',
+        marginBottom: 5,
+        textAlign: 'center'
+        // paddingRight: 30, // to ensure the text is never behind the icon
+        // width: 300,
+        // marginLeft: 30
+      },
+
     container: {
       flex: 1,
       backgroundColor: 'gainsboro',
@@ -113,8 +324,10 @@ const styles = StyleSheet.create({
     //   justifyContent: 'center',
     },
     listbutton: {
+        flex: 15,
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor: 'pink'
     },
     plusbutton: {
         // alignItems: 'flex-end',
@@ -183,6 +396,27 @@ const styles = StyleSheet.create({
         marginBottom: 8,
         textAlign: "center",
         fontSize: 20
-      }
+      },
+      flat_list_value_style: {
+        paddingTop: 10,
+        paddingLeft: 100,
+        paddingRight: 100,
+        fontSize: 15,
+
+        backgroundColor:'lightgrey',
+        color: 'darkslategrey'
+        
+
+    },
+    allitem:{
+        flex: 0.1,
+        backgroundColor: 'white',
+        borderRadius: 15,
+        
+        justifyContent: 'flex-end',
+    },
+    koko: {
+        borderRadius: 5
+    }
 
   });

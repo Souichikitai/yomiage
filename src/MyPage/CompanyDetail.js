@@ -12,9 +12,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 
 
-export default function CompanyDetail({navigation}) {
+export default function CompanyDetail({route, navigation}) {
 
-
+    const {id} = route.params;
+    const {c_name} = route.params;
     return(
         <SafeAreaView style={styles.container}>
             <View style={styles.modoru}>
@@ -25,7 +26,8 @@ export default function CompanyDetail({navigation}) {
                 </TouchableOpacity>
             </View>
             <View style={styles.listbutton}>
-                <Text>test each company list</Text>
+                <Text>id: {JSON.stringify(id)}</Text>
+                <Text>Company Name: {JSON.stringify(c_name)}</Text>
             </View>
         </SafeAreaView>
     );
