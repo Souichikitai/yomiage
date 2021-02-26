@@ -131,44 +131,54 @@ export default function Myquestion({navigation}) {
  
 
             }}>
-            <View style={styles.border}>
+            {/* <View style={styles.border}>
                 <Text style={{fontSize: 2}}>fe</Text>
-            </View>
+            </View> */}
             <Text style={styles.flat_list_value_style}>種類:  {kind}</Text>
             <Text style={styles.flat_list_value_style}>文章:  {sentence}</Text>
 
             </TouchableOpacity>
             {/* <Button title="delete" /> */}
-            <TouchableOpacity  style={{
-                alignItems:'flex-end',
-                marginRight:5
-            }}
-            onPress={()=>{
-                
-                // Alert.alert('削除しますか？', {canc});
 
-                Alert.alert(
-                    "削除しますか？",
-                    "",
-                    [
-                      {
-                        text: "Cancel",
-                        onPress: () => console.log("Cancel Pressed"),
-                        style: "cancel"
-                      },
-                      { text: "OK", onPress: () => remove_item(sentence)}
-                    ],
-                    { cancelable: false }
-                  );
+            <View style={{justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+                <TouchableOpacity  style={{
+                    alignItems:'flex-end',
+                    marginRight:5,
+                    justifyContent: 'flex-end'
+                }}
+                onPress={()=>{
+                    
+                    // Alert.alert('削除しますか？', {canc});
 
-                setSelectedKind(kind);
-                setSelectedsent(sentence);
-                console.log("test" + selected_sent);
-                
-                
-            }}>
-                <Text style={{color:'dimgray'}}>削除</Text>
-            </TouchableOpacity>
+                    Alert.alert(
+                        "削除しますか？",
+                        "",
+                        [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        { text: "OK", onPress: () => remove_item(sentence)}
+                        ],
+                        { cancelable: false }
+                    );
+
+                    setSelectedKind(kind);
+                    setSelectedsent(sentence);
+                    console.log("test" + selected_sent);
+                    
+                    
+                }}>
+
+
+                    {/* <View > */}
+                    <Text style={{color:'dimgray', paddingRight: 5, paddingBottom: 2}}>削除</Text>
+                    {/* </View> */}
+                    
+                </TouchableOpacity>
+            </View>
+
         </View>
       );
     
@@ -236,7 +246,7 @@ useEffect(()=>{
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'grey',
+      backgroundColor: 'gainsboro',
     //   alignItems: 'center',
     //   justifyContent: 'center',
     },
@@ -258,17 +268,27 @@ const styles = StyleSheet.create({
     },
     allitem:{
         flex: 0.1,
-        backgroundColor: 'white',
+        // backgroundColor: 'white',
         borderRadius: 10,
         justifyContent: 'flex-end',
-    },
-    flat_list_value_style: {
+        shadowColor: "black",
+        shadowOffset: {
+        width: 2,
+        height: 2,
+        },
+        shadowRadius:2,
+        shadowOpacity: 0.5,
+        marginBottom: 2.5,
+        marginTop: 2.5,
         paddingTop: 10,
         paddingLeft: 10,
         fontSize: 17,
-        backgroundColor:'gainsboro',
+        backgroundColor:'ghostwhite',
         borderRadius: 20
-
+    },
+    flat_list_value_style: {
+        color: 'darkslategrey',
+        fontSize: 18
     }
 
   });

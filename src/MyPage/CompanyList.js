@@ -44,12 +44,6 @@ export default function CompanyList({navigation}) {
             tx.executeSql(
             'select * from companys',
             [],
-            // (_, { rows: { _array } }) => {
-            //     var items = JSON.stringify(_array)
-            //     setSentecesfrom(items)
-            //     // setSentecesfrom(_array)
-            //     console.log(" sentences")
-            // }
     
             (_, { rows}) => {
                 console.log(" Result is:  " + JSON.stringify(rows._array));
@@ -57,8 +51,7 @@ export default function CompanyList({navigation}) {
                     Alert.alert('データベースが空です');
                 }
                 setCData_array(rows._array);
-                // setCustombutton(false);
-                // setAllbutton(true);
+
             }
             );
         },
@@ -295,7 +288,7 @@ export default function CompanyList({navigation}) {
                             //       containerStyle={{borderBottomWidth: 0}}
                             //     />
                             //   )}
-                            keyExtractor={item => item.id}
+                            keyExtractor={item => JSON.stringify(item.id)}
                             ItemSeparatorComponent={renderSeparator}
                         />
                 {/* <TouchableOpacity onPress={() => navigation.navigate('CompanyDetail')}>
@@ -388,6 +381,13 @@ const styles = StyleSheet.create({
       },
       buttonOpen: {
         backgroundColor: "tomato",
+        shadowColor: "grey",
+        shadowOffset: {
+        width: 2,
+        height: 2,
+        },
+        shadowRadius:2,
+        shadowOpacity: 2,
         
       },
       buttonClose: {
@@ -409,7 +409,14 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         // marginTop: 10,
-        fontSize:20
+        fontSize:20,
+        shadowColor: "black",
+        shadowOffset: {
+        width: 2,
+        height: 2,
+        },
+        shadowRadius:2,
+        shadowOpacity: 0.5,
         
       },
 
@@ -434,8 +441,15 @@ const styles = StyleSheet.create({
         flex: 0.1,
         backgroundColor: 'white',
         borderRadius: 15,
-        
+        shadowColor: "black",
+        shadowOffset: {
+        width: 2,
+        height: 2,
+        },
+        shadowRadius:2,
+        shadowOpacity: 2,
         justifyContent: 'flex-end',
+        marginBottom: 3
     },
     koko: {
         borderRadius: 5
