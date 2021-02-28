@@ -67,7 +67,8 @@ export default function CompanyList({navigation}) {
         var company_name = new_cname;
         var date = new_date;
         var round = new_round;
-        var sentence = new_bunn;
+        // var sentence = new_bunn;
+        var sentence = "趣味は?";
         var note = new_note;
 
         if(new_cname == "" || new_date == "" || new_round == ""){

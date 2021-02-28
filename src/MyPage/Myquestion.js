@@ -235,7 +235,7 @@ useEffect(()=>{
 
 
 
-        <FlatList data={Data_array} renderItem={renderItem} keyExtractor={item => item.id}/>
+        <FlatList data={Data_array} renderItem={renderItem} keyExtractor={item => JSON.stringify(item.id)}/>
             
         {/* </ScrollView> */}
         </SafeAreaView>

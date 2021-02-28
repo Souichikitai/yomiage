@@ -82,17 +82,18 @@ export default function CompanyDetail({route, navigation}) {
 
     const Flat_list_sentence = ({id, round, sentence}) => (
     
-    <View style={{margin: 1, backgroundColor: 'white', borderRadius: 9, flexDirection: 'row'}}>
-        <View style={{alignItems:'flex-start'}}>
+    <View style={{margin: 1, backgroundColor: 'white', borderRadius: 9}}>
+        <View style={{alignItems: 'flex-start'}}>
             <TouchableOpacity onPress={()=>{console.log(id + "" + c_name)}}>
-                <Text style={{fontSize: 18, marginLeft: 10, padding: 6}}>▲ {sentence}</Text>
+                <Text style={{fontSize: 22, marginLeft: 1, paddingLeft: 6,  alignItems: 'flex-start'}}>○ {sentence}</Text>
                 
             </TouchableOpacity>
+
         </View>
 
-        <View style={{alignItems: 'flex-end', justifyContent: 'flex-end', }}>
-            <TouchableOpacity >
-                <Text style={{fontSize: 21, marginLeft: 10, padding: 5, color: 'lightgrey'}}>×</Text>
+        <View style={{justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+        <TouchableOpacity >
+                <Text style={{fontSize: 20, marginLeft: 1, paddingRight: 10, color: 'dimgrey'}}>削除</Text>
             </TouchableOpacity>
         </View>
 
@@ -157,8 +158,8 @@ export default function CompanyDetail({route, navigation}) {
                             {c_name}
                         </Text>
                     </View>
-                <View style={{marginLeft: 5, flex: 0.8}}>
-                    <Text style={{fontSize: 20}}>今までの面接状況</Text>
+                <View style={{marginLeft: 5, flex: 0.8, backgroundColor: 'grey', borderRadius: 7}}>
+                    <Text style={{fontSize: 20, color: 'white'}}>今までの面接状況</Text>
                     <FlatList
                                 data={situationdata}
                                 renderItem={situationRenderItem}
@@ -179,17 +180,55 @@ export default function CompanyDetail({route, navigation}) {
                 <Text>Company Name: {JSON.stringify(c_name)}</Text>
                 <Text>{JSON.stringify(round)}</Text>
             </View> */}
+            
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 5}}>
+                    <View style={{alignItems: 'flex-start', justifyContent: 'flex-start'}}>
+                        <Text style={{fontSize: 20}}>聞かれた質問リスト</Text>
+                    </View>
+                        
+                        <View style={{alignItems: 'flex-end', backgroundColor: "tomato",
 
-            <View style={{marginLeft: 5, flex: 0.65}}>
-                <Text style={{fontSize: 20}}>聞かれた質問リスト</Text>
-                {empty_situation == true ? <View><Text>empty</Text></View>: (<FlatList
-                            data={sentencedata}
-                            renderItem={sentenceRenderItem}
-                            keyExtractor={item => JSON.stringify(item.id)}
-                            // ItemSeparatorComponent={renderSeparator}
-            />)}
+                            alignItems: 'flex-end', justifyContent: 'flex-end', borderRadius: 8,
+                            shadowColor: "black",
+                            shadowOffset: {
+                            width: 3,
+                            height: 3,
+                            },
+                            shadowRadius:2,
+                            shadowOpacity: 0.5,
+                        }}>
+                            <TouchableOpacity>
+                                <View >
+                                    <Text style={{fontSize: 22, color: 'white', padding: 3,
+                                    shadowColor: "black",
+                                    shadowOffset: {
+                                    width: 2,
+                                    height: 2,
+                                    },
+                                    shadowRadius:2,
+                                    shadowOpacity: 0.4,
+                    
+                                    }}>＋追加</Text>
+                                </View>
+                                
+                            </TouchableOpacity>
+                            
+                        </View>
+                        
+                </View>
 
-            </View>
+
+                <View style={{marginLeft: 5, flex: 0.65,flexDirection: 'column'}}>
+                    
+
+                    {empty_situation == true ? <View><Text>empty</Text></View>: (<FlatList
+                                data={sentencedata}
+                                renderItem={sentenceRenderItem}
+                                keyExtractor={item => JSON.stringify(item.id)}
+                                // ItemSeparatorComponent={renderSeparator}
+                    />)}
+
+                </View>
 
 
         </SafeAreaView>
