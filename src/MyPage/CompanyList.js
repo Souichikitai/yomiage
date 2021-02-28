@@ -42,13 +42,13 @@ export default function CompanyList({navigation}) {
         db.transaction(
         tx => {
             tx.executeSql(
-            'select * from companys',
+            'select distinct company_name, round from companys',
             [],
     
             (_, { rows}) => {
                 console.log(" Result is:  " + JSON.stringify(rows._array));
                 if(JSON.stringify(rows._array) == "[]"){
-                    Alert.alert('データベースが空です');
+                    // Alert.alert('データベースが空です');
                 }
                 setCData_array(rows._array);
 
@@ -108,10 +108,26 @@ export default function CompanyList({navigation}) {
         getallCDatafrom();
     }
 
+    function deleteSpecificItem(c_name, round){
+        console.log(c_name + " " + round + "を削除します");
+
+        db.transaction(tx => {
+            tx.executeSql(
+              "DELETE FROM companys WHERE company_name = ? AND round = ? ;"
+              ,[c_name, round]
+            );
+          },
+          () => {console.log('fail')},
+          () => {console.log('success')},
+          );
+
+          getallCDatafrom();
+    }
+
     const Flat_list_company = ({ id, c_name, date, round, note}) => (
         <View style={styles.allitem}>
             <TouchableOpacity style={styles.koko} onPress={()=> {
-                console.log(id + "" + c_name + "" + date + "" + round + "" + note), 
+                console.log(c_name + "" + round), 
                 navigation.navigate('CompanyDetail', {
                     id: id,
                     c_name: c_name,
@@ -133,31 +149,31 @@ export default function CompanyList({navigation}) {
                 alignItems:'flex-end',
                 marginRight:5
             }}
-            onPress={deleteCAll}
-            // onPress={()=>{
+            // onPress={deleteCAll}
+            onPress={()=>{
                 
-            //     // Alert.alert('削除しますか？', {canc});
+                // Alert.alert('削除しますか？', {canc});
 
-            //     Alert.alert(
-            //         "削除しますか？",
-            //         "",
-            //         [
-            //           {
-            //             text: "Cancel",
-            //             onPress: () => console.log("Cancel Pressed"),
-            //             style: "cancel"
-            //           },
-            //           { text: "OK", onPress: () => remove_item(sentence)}
-            //         ],
-            //         { cancelable: false }
-            //       );
+                Alert.alert(
+                    "削除しますか？",
+                    "",
+                    [
+                      {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                      },
+                      { text: "OK", onPress: () => deleteSpecificItem(c_name, round)}
+                    ],
+                    { cancelable: false }
+                  );
 
-            //     // setSelectedKind(kind);
-            //     // setSelectedsent(sentence);
-            //     // console.log("test" + selected_sent);
+                // setSelectedKind(kind);
+                // setSelectedsent(sentence);
+                // console.log("test" + selected_sent);
                 
                 
-            // }}
+            }}
             >
                 <Text style={{color:'grey', margin:2}}>削除</Text>
             </TouchableOpacity>
