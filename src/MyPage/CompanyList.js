@@ -42,7 +42,7 @@ export default function CompanyList({navigation}) {
         db.transaction(
         tx => {
             tx.executeSql(
-            'select distinct company_name, round from companys',
+            'select distinct company_name, date, round from companys',
             [],
     
             (_, { rows}) => {
@@ -128,11 +128,13 @@ export default function CompanyList({navigation}) {
     const Flat_list_company = ({ id, c_name, date, round, note}) => (
         <View style={styles.allitem}>
             <TouchableOpacity style={styles.koko} onPress={()=> {
-                console.log(c_name + "" + round), 
+                console.log(id + c_name + "" + date +""+ round), 
                 navigation.navigate('CompanyDetail', {
-                    id: id,
+                    id: id, 
                     c_name: c_name,
+                    date: date,
                     round: round
+                    
                   });
                 // navigation.navigate('CompanyDetail')
                 }}>
